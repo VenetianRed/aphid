@@ -555,6 +555,7 @@ train.PHMM <- function(x, y, method = "Viterbi", seqweights = "Henikoff",
       gc()
     }
     if(!quiet) cat("Warning: failed to converge. Try increasing 'maxiter' or modifying start parameters")
+    model$converged <- FALSE
     if(!logspace){
       model$A <- exp(model$A)
       model$E <- exp(model$E)
@@ -569,7 +570,6 @@ train.PHMM <- function(x, y, method = "Viterbi", seqweights = "Henikoff",
     }
     if(para & stopclustr) parallel::stopCluster(cores)
     gc()
-    model$converged <- FALSE
     return(model)
   }else stop("Invalid argument given for 'method'")
 }
