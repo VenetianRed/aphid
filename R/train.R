@@ -548,6 +548,7 @@ train.PHMM <- function(x, y, method = "Viterbi", seqweights = "Henikoff",
         }
         if(para & stopclustr) parallel::stopCluster(cores)
         if(!quiet) cat("Convergence threshold reached after", i, "EM iterations\n")
+        model$converged <- TRUE
         return(model)
       }
       LL <- logPx
@@ -568,6 +569,7 @@ train.PHMM <- function(x, y, method = "Viterbi", seqweights = "Henikoff",
     }
     if(para & stopclustr) parallel::stopCluster(cores)
     gc()
+    model$converged <- FALSE
     return(model)
   }else stop("Invalid argument given for 'method'")
 }
