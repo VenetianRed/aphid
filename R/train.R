@@ -548,14 +548,14 @@ train.PHMM <- function(x, y, method = "Viterbi", seqweights = "Henikoff",
         }
         if(para & stopclustr) parallel::stopCluster(cores)
         if(!quiet) cat("Convergence threshold reached after", i, "EM iterations\n")
-        model$converged <- TRUE
+        model[['converged']] <- TRUE
         return(model)
       }
       LL <- logPx
       gc()
     }
     if(!quiet) cat("Warning: failed to converge. Try increasing 'maxiter' or modifying start parameters")
-    model$converged <- FALSE
+    model[['converged']] <- FALSE
     if(!logspace){
       model$A <- exp(model$A)
       model$E <- exp(model$E)
